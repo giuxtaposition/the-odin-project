@@ -14,7 +14,7 @@ These exercises are designed to complement the [Ruby Basic lessons](https://www.
 
 **TIP**: When there is only one exercise file in a directory (such as in `6_arrays`) you can omit the path to the file and just enter `bundle exec rspec` to run the tests in that file.
 
-###  Contents
+### Contents
 
 #### 1.Basic Data Types
 
@@ -23,7 +23,7 @@ These exercises are designed to complement the [Ruby Basic lessons](https://www.
 
 #### 6.Arrays
 
-- [ ] Array Exercises
+- [x] Array Exercises
 
 #### 7.Hashes
 
