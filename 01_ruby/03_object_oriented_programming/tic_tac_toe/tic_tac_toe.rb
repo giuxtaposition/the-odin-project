@@ -6,23 +6,9 @@ class TicTacToe
 
   def initialize(player_symbol)
     invalid_player_symbol?(player_symbol)
-    @grid = [%w[1 2 3], %w[4 5 6], %w[7 8 9]]
+    @grid = Grid.new
     @player_symbol = player_symbol
-    print_grid
-  end
-
-  private
-
-  def print_grid
-    printed_grid = []
-    @grid.each_with_index do |row, row_index|
-      row.each_with_index do |cell, cell_index|
-        printed_grid << " #{cell} "
-        printed_grid << '|' if cell_index < 2
-      end
-      printed_grid << "\n---+---+---\n" if row_index < 2
-    end
-    puts printed_grid.join
+    @grid.render
   end
 
   def invalid_player_symbol?(player_symbol)
@@ -36,5 +22,27 @@ class TicTacToe
     def initialize(symbol)
       super("Invalid player symbol: #{symbol}")
     end
+  end
+end
+
+class Grid
+  TEMPLATE = <<~EOD
+    ┌───┬───┬───┐
+    │ 1 │ 2 │ 3 │
+    ├───┼───┼───┤
+    │ 4 │ 5 │ 6 │
+    ├───┼───┼───┤
+    │ 7 │ 8 │ 9 │
+    └───┴───┴───┘
+  EOD
+
+  attr_accessor :marker_positions
+
+  def initialize
+    @marker_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
+
+  def render
+    puts TEMPLATE.gsub(/[1-9]/) { |d| @marker_positions[d.to_i - 1] }
   end
 end
