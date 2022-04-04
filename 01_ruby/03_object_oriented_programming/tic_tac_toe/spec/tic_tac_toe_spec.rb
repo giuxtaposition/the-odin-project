@@ -28,4 +28,38 @@ RSpec.describe 'Tic Tac Toe' do
       expect { TicTacToe.new('') }.to raise_error(TicTacToe::InvalidPlayerSymbolException)
     end
   end
+
+  describe 'play' do
+    game = TicTacToe.new('O')
+    it 'first player turn, then cpu turn' do
+      after_player_turn = <<~EOD
+        ┌───┬───┬───┐
+        │ O │ 2 │ 3 │
+        ├───┼───┼───┤
+        │ 4 │ 5 │ 6 │
+        ├───┼───┼───┤
+        │ 7 │ 8 │ 9 │
+        └───┴───┴───┘
+      EOD
+
+      after_cpu_turn = <<~EOD
+        ┌───┬───┬───┐
+        │ O │ 2 │ 3 │
+        ├───┼───┼───┤
+        │ 4 │ X │ 6 │
+        ├───┼───┼───┤
+        │ 7 │ 8 │ 9 │
+        └───┴───┴───┘
+      EOD
+
+      expect(game)
+        .to receive(:gets)
+        .and_return('1')
+      expect(game)
+        .to receive(:available_positions)
+        .and_return([5])
+
+      expect { game.play }.to output("#{after_player_turn}#{after_cpu_turn}").to_stdout
+    end
+  end
 end
